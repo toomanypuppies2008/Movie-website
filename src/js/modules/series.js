@@ -1,101 +1,97 @@
-export const movieListContainer = document.getElementById("movie-list");
-let currentIndex = 0;
-let itemsPerView = 1;
+const seriesContainer = document.querySelector(".series-page__content");
+const seriesArrow_buttonNext = document.querySelector(
+  ".seriesArrow_buttonNext"
+);
+const seriesArrow_buttonPrev = document.querySelector(
+  ".seriesArrow_buttonPrev"
+);
+let series = [];
+let offset = 0; /* Переменная начальной точки отсчета фильмов */
+let limit = 5; /* Переменная лимита фильмов за раз*/
 
-export async function fetchSeries() {
-  const apiKey = "1227f05d-bdfa-4477-b065-bda4caa8dc7a";
+/* Функция получения данных о фильмах с api */
+export async function getSeries() {
   try {
     const response = await fetch(
-      `https://kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=TV_SERIES&ratingFrom=2&ratingTo=9&yearFrom=1000&yearTo=3000&page=1`,
+      "https://kinopoiskapiunofficial.tech/api/v2.2/films/collections?type=TOP_250_TV_SHOWS&page=1",
       {
+        method: "GET",
         headers: {
-          "X-API-KEY": apiKey,
+          "X-API-KEY": "dd146e83-6098-4c58-bea6-a52186942de2",
           "Content-Type": "application/json",
         },
       }
     );
-    const data = await response.json();
-    console.log(data);
-
-    if (data.items.length > 0) {
-      displaySeries(data.items);
-    } else {
-      movieListContainer.innerHTML = "<p>No series found</p>";
-    }
+    const responseJson = await response.json();
+    series = responseJson.items;
+    console.log(series);
+    renderSeries(offset, limit);
   } catch (error) {
-    console.error("Error:", error);
-    movieListContainer.innerHTML = "<p>Error</p>";
+    document.querySelector(
+      ".series-page__title"
+    ).innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
+    seriesArrow_buttonNext.style.display = "none";
+    const image = document.createElement("img");
+    image.style.margin = "0 auto";
+    image.src =
+      "src/img/popular/foni-papik-pro-8htj-p-kartinki-oshibka-na-prozrachnom-fone-25.png";
+    seriesContainerContainer.append(image);
   }
 }
 
-export function displaySeries(series) {
-  movieListContainer.innerHTML = "";
-  series.forEach((seriesItem) => {
-    const movieListItem = document.createElement("div");
-    movieListItem.className = "movie-list-item";
-
-    const img = document.createElement("img");
-    img.className = "movie-list-item-img";
-    img.src = seriesItem.posterUrlPreview || "./img/numerator.jpg";
-    img.alt = seriesItem.nameRu;
-    const title = document.createElement("span");
-    title.className = "movie-list-item-title";
-    title.textContent = seriesItem.nameRu;
-
-    const button = document.createElement("button");
-    button.className = "movie-list-item-button";
-    button.textContent = "Watch";
-
-    movieListItem.appendChild(img);
-    movieListItem.appendChild(title);
-    movieListItem.appendChild(button);
-
-    movieListContainer.appendChild(movieListItem);
-  });
-  updateItemsPerView();
-  showNextItems();
-}
-
-export function updateItemsPerView() {
-  const containerWidth = movieListContainer.clientWidth;
-  const itemWidth = 120; // Ширина элемента (в пикселях)
-
-  itemsPerView = Math.floor(containerWidth / itemWidth);
-}
-
-export function showNextItems() {
-  const items = movieListContainer.children;
-  const totalItems = items.length;
-
-  // Скрываем все элементы
-  for (let i = 0; i < totalItems; i++) {
-    items[i].style.display = "none";
-  }
-
-  // Показываем следующие элементы
-  for (
-    let i = currentIndex;
-    i < Math.min(currentIndex + itemsPerView, totalItems);
-    i++
-  ) {
-    items[i].style.display = "block";
-  }
-
-  currentIndex += 1;
-  if (currentIndex >= totalItems) {
-    currentIndex = totalItems - itemsPerView;
+/* Функция визуализации каждых последующих или предыдущих пяти фильмов */
+function renderSeries(minIndex, maxIndex) {
+  for (let i = minIndex; i < maxIndex; i++) {
+    let movieWrapper = document.createElement("div");
+    movieWrapper.classList.add("series-page__content-item");
+    let image = document.createElement("img");
+    image.classList.add("series-page__movie-image");
+    image.src = `${series[i].posterUrlPreview}`;
+    image.alt = `${series[i].nameRu}`;
+    let p1 = document.createElement("p");
+    p1.classList.add("series-page__movie-info");
+    p1.textContent = `${series[i].nameRu} (${series[i].year})`;
+    let p2 = document.createElement("p");
+    p2.classList.add("series-page__movie-genres");
+    p2.textContent = `${series[i].genres
+      .map((genre) => `${genre.genre}`)
+      .join(", ")}`;
+    const buttonLink = document.createElement("a");
+    buttonLink.textContent = "Смотреть";
+    buttonLink.className = "series-page__watch-button";
+    buttonLink.setAttribute(
+      "href",
+      `https://www.kinopoisk.ru/film/${series[i].kinopoiskId}/`
+    );
+    buttonLink.setAttribute("target", "blank");
+    movieWrapper.append(image, p1, p2, buttonLink);
+    seriesContainer.append(movieWrapper);
   }
 }
-export function initSeriesModule() {
-  fetchSeries();
-  const arrow = document.getElementById("arrow");
 
-  if (arrow) {
-    arrow.addEventListener("click", showNextItems);
+/* Функции видимости и переключения кнопок 'следующая-предыдущая страницы'*/
+seriesArrow_buttonNext.addEventListener("click", nextSeries);
+seriesArrow_buttonPrev.addEventListener("click", previousSeries);
+seriesArrow_buttonPrev.style.display = "none";
+
+function nextSeries() {
+  seriesContainer.innerHTML = "";
+  offset = offset + limit;
+  renderSeries(offset, offset + limit);
+  seriesArrow_buttonPrev.style.display = "block";
+  if (offset == 15) {
+    seriesArrow_buttonNext.style.display = "none";
   }
+}
 
-  window.addEventListener("resize", () => {
-    updateItemsPerView();
-    showNextItems();
-  });
+function previousSeries() {
+  seriesContainer.innerHTML = "";
+  offset = offset - limit;
+  renderSeries(offset, offset + limit);
+  if (offset == 0) {
+    seriesArrow_buttonPrev.style.display = "none";
+  }
+  if (offset < 15) {
+    seriesArrow_buttonNext.style.display = "block";
+  }
 }
