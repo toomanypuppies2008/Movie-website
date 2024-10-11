@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/scss/style.scss" />
+  <!-- стрелка из макета start -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <!-- стрелка из макета finish -->
+  <title>Movie App</title>
+</head>
+
+<body class="theme-dark">
+  <header class="header">
+    <div class="header__logo">MovieSearch</div>
+    <nav class="header__nav">
+      <ul class="header__nav-list">
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Главная</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Фильмы</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Сериалы</a>
+        </li>
+        <li class="header__nav-item">
+          <a href="#" class="header__nav-link">Популярные</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="header__burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="header__toggle">
+      <input type="checkbox" id="theme-toggle" class="header__toggle-checkbox" />
+      <label for="theme-toggle" class="header__toggle-label">Светлая тема</label>
+    </div>
+  </header>
+  <aside class="sidebar">
+    <div class="sidebar__items">
+      <a href="/src/html/search.html" class="sidebar__item" id="search">
+        <svg class="sidebar__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path
+            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+        </svg>
+      </a>
+      <a href="../../index.html" class="sidebar__item" id="home-page">
+        <svg class="sidebar__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+          <path
+            d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+        </svg>
+      </a>
+      <a href="!#" class="sidebar__item">
+        <svg class="sidebar__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" id="saved">
+          <path
+            d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z" />
+        </svg>
+      </a>
+    </div>
+  </aside>
+  <main class="main">
+    <section class="movie">
+      <div class="movie__content"></div>
+    </section>
+    <!-- Movies Section start -->
+    <section class="ФИЛЬМЫ">
+      <div class="movie-container">
+        <div class="movie-content-container">
+          <div class="movie-movie-list-container">
+            <h1 class="movie-movie-list-title">ФИЛЬМЫ</h1>
+            <div class="movie-list-wrapper">
+              <div class="movie-movie-list"></div>
+            </div>
+            <i class="fas fa-chevron-left movie-arrow-left arrow-inactive"></i>
+            <i class="fas fa-chevron-right movie-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Movies Section  finish -->
+    <!-- Popular Section начало -->
+    <section class="popular-page">
+      <h2 class="popular-page__title">Популярные фильмы</h2>
+      <div class="popular-page__content-container">
+        <div class="popular-page__content"></div>
+        <i class="fas fa-chevron-right arrow-next"></i>
+        <i class="fas fa-chevron-left arrow-prev"></i>
+      </div>
+    </section>
+    <!-- Popular Section конец -->
+
+    <!-- block series start-->
+    <div class="container">
+      <div class="container__content">
+        <div class="movie-list">
+          <h1 class="movie-list__title">SERIES</h1>
+          <div class="movie-list__wrapper">
+            <div class="movie-list__items" id="movie-list"></div>
+            <i class="fas fa-chevron-right arrow" id="arrow"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- block series finish-->
+  </main>
+  <footer class="footer">
+    <nav class="footer__nav">
+      <ul class="footer__nav-list">
+        <li class="footer__nav-item">
+          <a href="#" class="footer__nav-link">Главная</a>
+        </li>
+        <li class="footer__nav-item">
+          <a href="#" class="footer__nav-link">Фильмы</a>
+        </li>
+        <li class="footer__nav-item">
+          <a href="#" class="footer__nav-link">Сериалы</a>
+        </li>
+        <li class="footer__nav-item">
+          <a href="#" class="footer__nav-link">Популярные</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="footer__rights">Все права защищены © 2024</div>
+  </footer>
+
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+
+</html>

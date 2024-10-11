@@ -1,0 +1,14 @@
+//здесь создавайте миксины
+@mixin hover-effect($color) {
+    &:hover {
+        background-color: $color;
+        transition: background-color $transition-time ease-in;
+    }
+}
+
+@mixin flex-center($direction: row) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}

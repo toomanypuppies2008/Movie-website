@@ -1,0 +1,132 @@
+@import "../vars.scss";
+
+.container {
+  min-height: calc(100vh - 50px);
+  margin: 0 auto;
+  padding-left: 50px;
+}
+
+.movie-movie-list-container {
+  position: relative;
+  margin-left: 5rem;
+}
+
+.movie-list-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.movie-movie-list {
+  display: flex;
+  align-items: center;
+  height: 40vh;
+  transform: translateX(0);
+  transition: all 1s ease-in-out;
+}
+
+.movie-movie-list-title {
+  margin-left: 5vw;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+  font-size: 36px;
+}
+
+.movie-movie-list-item {
+  min-width: 20%;
+  margin-right: 0, 8vw;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.movie-movie-list-item:hover .movie-movie-list-item-img {
+  transform: scale(1.2);
+  margin: 0 30px;
+  opacity: 0.5;
+}
+
+.movie-movie-list-item:hover .movie-movie-list-item-title,
+.movie-movie-list-item:hover .movie-movie-list-item-desc,
+.movie-movie-list-item:hover .movie-movie-list-item-button {
+  opacity: 1;
+}
+
+.movie-movie-list-item-img {
+  transition: all 1s ease-in-out;
+  max-width: 14vw;
+
+  object-fit: cover;
+}
+
+.movie-movie-list-item-title {
+  background-color: #333;
+  padding: 0 10px;
+  font-size: 1.5em;
+  font-weight: bold;
+  position: absolute;
+  top: 10%;
+  left: 50px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movie-movie-list-item-desc {
+  background-color: #333;
+  padding: 10px;
+  font-size: 14px;
+  position: absolute;
+  top: 30%;
+  left: 50px;
+  width: 230px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movie-movie-list-item-button {
+  padding: 10px;
+  background-color: #4dbf00;
+  color: white;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  bottom: 3rem;
+  left: 50px;
+  opacity: 0;
+  transition: 1s all ease-in-out;
+}
+
+.movie-arrow-right {
+  font-size: 6vw;
+  position: absolute;
+  top: 10rem;
+  right: 0;
+  color: lightgray;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.movie-arrow-left {
+  font-size: 6vw;
+  position: absolute;
+  top: 10rem;
+  color: lightgray;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.arrow-inactive {
+  cursor: unset;
+  color: #333;
+}
+
+.container.active {
+  background-color: white;
+}
+
+.movie-movie-list-title.active {
+  color: black;
+}

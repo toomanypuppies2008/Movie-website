@@ -1,0 +1,15 @@
+@import "./mixins.scss";
+@import "./template.scss";
+@import "./vars.scss";
+
+@import "./bloks/header.scss";
+@import "./bloks/burger.scss";
+@import "./bloks/home.scss";
+@import "./bloks/aside.scss";
+@import "./bloks/search.scss";
+@import "./bloks/movies.scss";
+@import "./bloks/series.scss";
+@import "./bloks/popular.scss";
+@import "./bloks/footer.scss";
+
+//Стили пишем в папке bloks!Этот основной файл не трогаем
