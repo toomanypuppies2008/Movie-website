@@ -1,39 +1,66 @@
-.movie {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: inherit;
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  padding-right: 50px;
+@import "../vars.scss";
+@import "../mixins.scss";
 
-  &__content {
-    text-align: left;
-    max-width: 400px;
-    margin-left: 50px;
-    padding-left: 20px;
-  }
+.home-page {
+  width: calc(98vw - 50px);
+  margin-left: 50px;
+  min-height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-rows: 1fr;
+
+
   &__title {
-    font-size: 48px;
-    margin-bottom: 20px;
-    color: inherit;
+    font-weight: 600;
+    color: $white;
+    font-size: 5rem;
+    margin: 0;
+    padding-top: 4vh;
+    padding-left: 3vw;
   }
+
   &__description {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: inherit;
+    font-weight: 300;
+    color: $white;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 15% 0;
   }
-  &__watch-btn {
+  &__watch-button {
+    width: 2vw;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 0 25%;
     background-color: $accent-color;
     color: $white;
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
     border-radius: 27px;
+    &:hover {
+      text-decoration: underline;
+    }
 
     @include hover-effect($search-hover-color);
   }
 }
+
+
+
+.div1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.div2 {
+  border-radius: 40px;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.title-container,.year-container,.country-container,.genres-container,.button-container {
+text-align: center;
+}
+

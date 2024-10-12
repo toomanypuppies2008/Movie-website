@@ -99,6 +99,9 @@ transition: 0.5s all ease-in-out;
       font-size: 16px;
       font-weight: 600;
       border-radius: 27px;
+      &:hover {
+        text-decoration: underline;
+      }
   
       @include hover-effect($search-hover-color);
     }
@@ -107,7 +110,7 @@ transition: 0.5s all ease-in-out;
 .arrow-next {
   font-size: 10.9vw;
   position: absolute;
-  top: 18.1vh;
+  top: 15.7vh;
   right: 0;
   color: lightgray;
   opacity: 0.4;

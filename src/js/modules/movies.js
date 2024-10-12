@@ -17,7 +17,7 @@ export async function getMovies() {
       {
         method: "GET",
         headers: {
-          "X-API-KEY": "dd146e83-6098-4c58-bea6-a52186942de2",
+          "X-API-KEY": "8a08d4f7-66e2-4e35-a1e3-4e977e919e37",
           "Content-Type": "application/json",
         },
       }

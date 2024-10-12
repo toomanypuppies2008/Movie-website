@@ -13,7 +13,7 @@ export async function getPopularMovies() {
       {
         method: "GET",
         headers: {
-          "X-API-KEY": "dd146e83-6098-4c58-bea6-a52186942de2",
+          "X-API-KEY": "8a08d4f7-66e2-4e35-a1e3-4e977e919e37",
           "Content-Type": "application/json",
         },
       }
@@ -70,7 +70,6 @@ if (container && arrow_buttonNext && arrow_buttonPrev) {
   arrow_buttonNext.addEventListener("click", next);
   arrow_buttonPrev.addEventListener("click", previous);
   arrow_buttonPrev.style.display = "none";
-
 }
 
 function next() {
