@@ -5,6 +5,7 @@ const seriesArrow_buttonNext = document.querySelector(
 const seriesArrow_buttonPrev = document.querySelector(
   ".seriesArrow_buttonPrev"
 );
+const seriesTitle = document.querySelector(".series-page__title");
 let series = [];
 let offset = 0; /* Переменная начальной точки отсчета фильмов */
 let limit = 5; /* Переменная лимита фильмов за раз*/
@@ -17,19 +18,20 @@ export async function getSeries() {
       {
         method: "GET",
         headers: {
-          "X-API-KEY": "8a08d4f7-66e2-4e35-a1e3-4e977e919e37",
+          "X-API-KEY": "dd146e83-6098-4c58-bea6-a52186942de2",
           "Content-Type": "application/json",
         },
       }
     );
     const responseJson = await response.json();
     series = responseJson.items;
-    console.log(series);
+    if (series.length === 0) {
+      seriesTitle.innerHTML = "Тут пусто =(";
+      return;
+    }
     renderSeries(offset, limit);
   } catch (error) {
-    document.querySelector(
-      ".series-page__title"
-    ).innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
+    seriesTitle.innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
     seriesArrow_buttonNext.style.display = "none";
     const image = document.createElement("img");
     image.style.margin = "0 auto";

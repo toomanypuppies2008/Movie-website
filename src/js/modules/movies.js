@@ -1,4 +1,5 @@
 const moviesContainer = document.querySelector(".movies-page__content");
+const moviesTitle = document.querySelector(".movies-page__title");
 const moviesArrow_buttonNext = document.querySelector(
   ".moviesArrow_buttonNext"
 );
@@ -17,19 +18,20 @@ export async function getMovies() {
       {
         method: "GET",
         headers: {
-          "X-API-KEY": "8a08d4f7-66e2-4e35-a1e3-4e977e919e37",
+          "X-API-KEY": "dd146e83-6098-4c58-bea6-a52186942de2",
           "Content-Type": "application/json",
         },
       }
     );
     const responseJson = await response.json();
     movies = responseJson.items;
-    console.log(movies);
+    if (movies.length === 0) {
+      moviesTitle.innerHTML = "Тут пусто =(";
+      return;
+    }
     renderMovies(offset, limit);
   } catch (error) {
-    document.querySelector(
-      ".movies-page__title"
-    ).innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
+    moviesTitle.innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
     moviesArrow_buttonNext.style.display = "none";
     const image = document.createElement("img");
     image.style.margin = "0 auto";

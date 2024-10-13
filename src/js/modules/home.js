@@ -1,6 +1,6 @@
-const homePageDiv1 = document.querySelector(".div1");
-const homePageDiv2 = document.querySelector(".div2");
-const homePageDiv3 = document.querySelector(".div3");
+const infoContainer = document.querySelector(".info-container");
+const posterContainer = document.querySelector(".poster-container");
+const descriptionContainer = document.querySelector(".description-container");
 const titleContainer = document.querySelector(".title-container");
 const yearContainer = document.querySelector(".year-container");
 const countryContainer = document.querySelector(".country-container");
@@ -15,7 +15,7 @@ export async function getHomePage() {
       {
         method: "GET",
         headers: {
-          "X-API-KEY": "8a08d4f7-66e2-4e35-a1e3-4e977e919e37",
+          "X-API-KEY": "dd146e83-6098-4c58-bea6-a52186942de2",
           "Content-Type": "application/json",
         },
       }
@@ -24,12 +24,12 @@ export async function getHomePage() {
     homePageMovies = responseJson.items;
     showHomePage();
   } catch (error) {
-    homePageDiv1.innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
+    infoContainer.innerHTML = `Кажется, что-то пошло не так: ${error.message}`;
   }
 }
 
 function showHomePage() {
-  homePageDiv2.style.backgroundImage = `url(${homePageMovies[0].posterUrlPreview})`;
+  posterContainer.style.backgroundImage = `url(${homePageMovies[0].posterUrlPreview})`;
   const title = document.createElement("h1");
   title.textContent = `${homePageMovies[0].nameRu}`;
   title.className = "home-page__title";
@@ -48,29 +48,13 @@ function showHomePage() {
     `https://www.kinopoisk.ru/film/${homePageMovies[0].kinopoiskId}/`
   );
   linkButton.setAttribute("target", "blank");
+  const description = document.createElement("p");
+  description.textContent = `${homePageMovies[0].description}`;
+  description.className = "home-page__description";
   titleContainer.append(title);
   yearContainer.append(year);
   countryContainer.append(countries);
   genresContainer.append(genres);
+  descriptionContainer.append(description);
   buttonContainer.append(linkButton);
-  const description = document.createElement("p");
-  description.textContent = `${homePageMovies[0].description}`;
-  description.className = "home-page__description";
-  homePageDiv3.append(description);
 }
-
-/*
-startHomePageRotation();
-function renderMovie(movie) {
-  movieContainer.innerHTML = ""; // Очищаем предыдущий контент
-  const movieElement = createMovieElement(movie); // Создаем элемент фильма
-  movieContainer.appendChild(movieElement); // Добавляем фильм в контейнер
-}
-//Ф-ия запуска показов фильмов через интревал
-function startMovieRotation() {
-  setInterval(() => {
-    currentMovieIndex = (currentMovieIndex + 1) % movies.length; // Увеличиваем индекс и обнуляем
-    renderMovie(movies[currentMovieIndex]); // Рендерим новый фильм
-  }, 100000); // Каждые 10 секунд
-}
-*/
